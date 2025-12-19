@@ -1,28 +1,32 @@
 const express = require("express");
-const dotenv = require('dotenv')
+const dotenv = require("dotenv");
 const app = express();
-const cors = require('cors')
+const cors = require("cors");
 
-app.use(cors())
+app.use(cors());
 //middleware
 app.use(express.json());
 
-const studentRouter = require("./routes/StudentRoutes");
-app.use("/", studentRouter);
+const userRouter = require("./routes/UserRoutes");
+app.use("/api", userRouter);
 
 app.listen(3001, () => {
-    console.log("Server is running on port 3001");
+  console.log("Server is running on port 3001");
 });
 
 module.exports = app;
 
 const mongoose = require("mongoose");
 dotenv.config();
-const queryString = process.env.MONGODB_URI || "mongodb+srv://dobalam:dobalam-it4409@lamdb-it4409.ybiwz.mongodb.net/College?retryWrites=true&w=majority&appName=lamdb-it4409";
+const queryString =
+  process.env.MONGODB_URI ||
+  "mongodb+srv://dung08122003:dung.tm0812@cluster0.cjqbu.mongodb.net/SimpleCRUDBackend?retryWrites=true&w=majority";
 
 //configure mongoose
-mongoose.connect(queryString, {
+mongoose
+  .connect(queryString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected!'))
-    .catch(err => console.log('MongoDB connection error:', err.message));
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected!"))
+  .catch((err) => console.log("MongoDB connection error:", err.message));
